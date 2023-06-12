@@ -1,26 +1,38 @@
 .App {
   text-align: center;
+  width: 70%;
+  margin: 0 auto;
 }
 
-form {
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.flex-row-item {
+  flex-basis: 50%;
+}
+.flex-col-center {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
+  gap: 1rem;
 }
 
-.field-container{
+.flex-col-start {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  
 }
 label {
   font-size: 20px;
   display: inline-block;
-  width: 200px;
+  width: 165px;
   text-align: left;
 }
 
@@ -30,44 +42,34 @@ input {
   height: 30px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  padding-left: 10px;
 }
 
 button {
-  margin-top: 20px;
-  width: 100px;
+  width: 150px;
   height: 30px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  background-color: lightgreen;
   cursor: pointer;
-  width: 300px;
-
-}
-
-button.btn {
-  width: 150px;
-  margin-left: 10px;
 }
 
 button.active {
   background-color: green;
   color: white;
 }
-button.not-active:hover, button.btn-basic:hover {
+button.not-active:hover,
+button.btn-basic:hover {
   background-color: green;
   color: white;
-
 }
 
 button.btn-submit {
-  background-color: lightblue;
-  color: black;
+  background-color: #304df5;
+  color: white;
 }
 
-button.btn-submit:hover {
-  background-color: blue;
+button.btn-submit:not([disabled]):hover {
   color: white;
+  background-color: #1734da;
 }
 
 button:focus {
@@ -78,15 +80,65 @@ button:focus {
   border: 1px solid red;
 }
 
-p.error {
+span.error {
   color: red;
   font-size: 12px;
   margin-top: 5px;
   text-align: left;
+  display: block;
 }
 
 button:disabled,
 input:read-only {
   background-color: #ccc;
+  color: black;
+  cursor: not-allowed;
+}
+
+.btn-reset {
+  background-color: lightcoral;
+  color: black;
+  cursor: pointer;
+}
+
+.btn-reset:hover {
+  background-color: red;
+  color: white;
+}
+
+.change-initial-values {
+  margin: 2rem 0 2rem 0;
+}
+
+/* Custom select container */
+.select-container {
+  position: relative;
+}
+
+/* Custom select dropdown */
+.select-container select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Custom select dropdown focus */
+.select-container select:focus {
+  outline: none;
+  border-color: #aaa;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom select dropdown hover */
+.select-container select:hover {
+  border-color: #999;
+}
+
+/* Custom select dropdown disabled */
+.select-container select:disabled {
+  background-color: #eee;
   cursor: not-allowed;
 }

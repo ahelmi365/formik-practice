@@ -10,7 +10,9 @@ export const basicSchema = yup.object().shape({
     .min(18, "Must be above 18")
     .max(50, "Must be below 50")
     .required("Age is required"),
+    
   email: yup.string().email("Invalid email").required("Email is required"),
+  
   password: yup
     .string()
     .min(8, "Password must be at least 8 characters")
@@ -19,6 +21,7 @@ export const basicSchema = yup.object().shape({
       "Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number"
     )
     .required("Password is required"),
+
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")

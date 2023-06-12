@@ -5,28 +5,29 @@ import AdvancedForm from "./AdvancedForm/AdvancedForm";
 
 function App() {
   const [currentForm, setCurrentForm] = useState("basic");
-  const handleFormSelection = (formName) => {
-    setCurrentForm(formName);
-  };
+
   return (
     <div className="App">
       <h1>Hello Formik</h1>
-      <button
-        onClick={() => handleFormSelection("basic")}
-        className={`btn btn-basic ${
-          currentForm === "basic" ? "active" : "non-active"
-        }`}
-      >
-        Basic Form
-      </button>
-      <button
-        onClick={() => handleFormSelection("advanced")}
-        className={`btn btn-advanced ${
-          currentForm === "advanced" ? "active" : "not-active"
-        }`}
-      >
-        Advanced Form
-      </button>
+      <div className="main-tabs flex-row-center">
+        <button
+          onClick={() => setCurrentForm("basic")}
+          className={`btn btn-basic ${
+            currentForm === "basic" ? "active" : "non-active"
+          }`}
+        >
+          Basic Form
+        </button>
+        <button
+          onClick={() => setCurrentForm("advanced")}
+          className={`btn btn-advanced ${
+            currentForm === "advanced" ? "active" : "not-active"
+          }`}
+        >
+          Advanced Form
+        </button>
+      </div>
+
       {currentForm === "basic" ? <BasicForm /> : <AdvancedForm />}
     </div>
   );

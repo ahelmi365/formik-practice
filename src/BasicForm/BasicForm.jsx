@@ -2,9 +2,10 @@ import React from "react";
 import { useFormik } from "formik";
 import { basicSchema } from "../schemas";
 
-const onSubmit = async (values, actions) => {
-  console.log("Submitting...");
-  await new Promise((resolve) => setTimeout(resolve, 10000));
+const submitForm = async (values, actions) => {
+  console.log("Submitting");
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+  console.log(values);
   actions.resetForm();
   console.log("Submitted");
 };
@@ -14,6 +15,8 @@ function BasicForm() {
     touched,
     errors,
     isSubmitting,
+    isValid,
+    dirty,
     handleChange,
     handleBlur,
     handleSubmit,
@@ -26,14 +29,14 @@ function BasicForm() {
       confirmPassword: "",
     },
     validationSchema: basicSchema,
-    onSubmit: onSubmit,
+    onSubmit: submitForm,
   });
 
   return (
     <>
       <h3>Basic Form</h3>
-      <form action="" onSubmit={handleSubmit}>
-        <div className="field-container">
+      <form className="flex-col-center" action="" onSubmit={handleSubmit}>
+        <div className="field-container flex-col-start">
           <label htmlFor="userName">User Name</label>
           <input
             type="text"
@@ -44,12 +47,13 @@ function BasicForm() {
             onBlur={handleBlur}
             className={errors.userName && touched.userName ? "input-error" : ""}
             readOnly={isSubmitting}
+            placeholder="Your user name"
           />
           {errors.userName && touched.userName && (
-            <p className="error">{errors.userName}</p>
+            <span className="error">{errors.userName}</span>
           )}
         </div>
-        <div className="field-container">
+        <div className="field-container flex-col-start">
           <label htmlFor="age">Age</label>
           <input
             type="number"
@@ -60,10 +64,13 @@ function BasicForm() {
             onBlur={handleBlur}
             className={errors.age && touched.age ? "input-error" : ""}
             readOnly={isSubmitting}
+            placeholder="Your age"
           />
-          {errors.age && touched.age && <p className="error">{errors.age}</p>}
+          {errors.age && touched.age && (
+            <span className="error">{errors.age}</span>
+          )}
         </div>
-        <div className="field-container">
+        <div className="field-container flex-col-start">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -74,12 +81,13 @@ function BasicForm() {
             onBlur={handleBlur}
             className={errors.email && touched.email ? "input-error" : ""}
             readOnly={isSubmitting}
+            placeholder="Your email"
           />
           {errors.email && touched.email && (
-            <p className="error">{errors.email}</p>
+            <span className="error">{errors.email}</span>
           )}
         </div>
-        <div className="field-container">
+        <div className="field-container flex-col-start">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -90,12 +98,13 @@ function BasicForm() {
             onBlur={handleBlur}
             className={errors.password && touched.password ? "input-error" : ""}
             readOnly={isSubmitting}
+            placeholder="Your password"
           />
           {errors.password && touched.password && (
-            <p className="error">{errors.password}</p>
+            <span className="error">{errors.password}</span>
           )}
         </div>
-        <div className="field-container">
+        <div className="field-container flex-col-start">
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
             type="password"
@@ -110,12 +119,17 @@ function BasicForm() {
                 : ""
             }
             readOnly={isSubmitting}
+            placeholder="Confirm your password"
           />
           {errors.confirmPassword && touched.confirmPassword && (
-            <p className="error">{errors.confirmPassword}</p>
+            <span className="error">{errors.confirmPassword}</span>
           )}
         </div>
-        <button className="btn btn-submit" disabled={isSubmitting} type="submit">
+        <button
+          className="btn btn-submit"
+          disabled={!dirty || !isValid || isSubmitting}
+          type="submit"
+        >
           Submit
         </button>
       </form>
